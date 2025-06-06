@@ -1,0 +1,174 @@
+{
+  "manifest_version": 3,
+  "name": "Universal AI Assistant",
+  "version": "2.0.0",
+  "description": "Multi-Chat + MD Export: 여러 AI에 동시 메시지 전송 및 대화 내용 마크다운 내보내기 통합 확장 프로그램",
+  
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "downloads",
+    "notifications",
+    "contextMenus",
+    "alarms",
+    "scripting",
+    "webNavigation"
+  ],
+  
+  "host_permissions": [
+    "https://chat.openai.com/*",
+    "https://chatgpt.com/*",
+    "https://chat.com/*",
+    "https://claude.ai/*",
+    "https://grok.com/*",
+    "https://x.com/*",
+    "https://twitter.com/*",
+    "https://www.perplexity.ai/*",
+    "https://perplexity.ai/*",
+    "https://gemini.google.com/*"
+  ],
+  
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://chatgpt.com/*",
+        "https://chat.com/*"
+      ],
+      "js": [
+        "content/content_common.js", 
+        "content/services/content_chatgpt.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://claude.ai/*"
+      ],
+      "js": [
+        "content/content_common.js", 
+        "content/services/content_claude.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://grok.com/*",
+        "https://x.com/*",
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "content/content_common.js", 
+        "content/services/content_grok.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://www.perplexity.ai/*",
+        "https://perplexity.ai/*"
+      ],
+      "js": [
+        "content/content_common.js", 
+        "content/services/content_perplexity.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://gemini.google.com/*"
+      ],
+      "js": [
+        "content/content_common.js", 
+        "content/services/content_gemini.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Universal AI Assistant",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  
+  "options_page": "options/options.html",
+  
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icons/*"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  
+  "commands": {
+    "open-popup": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A"
+      },
+      "description": "확장 프로그램 팝업 열기"
+    },
+    "toggle-extension": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+T"
+      },
+      "description": "확장 프로그램 활성화/비활성화 전환"
+    }
+  },
+  
+  "minimum_chrome_version": "88",
+  
+  "author": "Universal AI Assistant Team",
+  
+  "homepage_url": "https://github.com/your-username/universal-ai-assistant",
+  
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  
+  "externally_connectable": {
+    "matches": [
+      "https://chat.openai.com/*",
+      "https://chatgpt.com/*",
+      "https://claude.ai/*",
+      "https://grok.com/*",
+      "https://x.com/*",
+      "https://www.perplexity.ai/*",
+      "https://gemini.google.com/*"
+    ]
+  },
+  
+  "optional_permissions": [
+    "clipboardWrite",
+    "clipboardRead"
+  ],
+  
+  "short_name": "UniversalAI",
+  
+  "incognito": "spanning",
+  
+  "offline_enabled": false
+}

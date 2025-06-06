@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal AI Assistant 설정</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더 -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-main">
+                    <h1>🤖 Universal AI Assistant 설정</h1>
+                    <p class="subtitle">메시지 전송 및 MD 내보내기 통합 설정</p>
+                </div>
+                <div class="header-controls">
+                    <div class="version-badge">v2.0.0</div>
+                    <button id="helpBtn" class="help-btn" title="도움말">❓</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- 확장 프로그램 전체 활성화 섹션 -->
+            <section class="section extension-status">
+                <h2>🔌 확장 프로그램 제어</h2>
+                <div class="option-group">
+                    <div class="option-item featured">
+                        <div class="option-info">
+                            <h3>🔌 확장 프로그램 활성화</h3>
+                            <p>전체 확장 프로그램의 동작을 제어합니다 (단축키: <kbd>Ctrl+Shift+T</kbd>)</p>
+                        </div>
+                        <div class="toggle-switch active" data-option="extensionEnabled"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI 서비스 활성화 섹션 -->
+            <section class="section">
+                <h2>🤖 AI 서비스 활성화</h2>
+                <div class="ai-grid">
+                    <div class="ai-card" data-ai="chatgpt">
+                        <div class="ai-header">
+                            <span class="ai-icon">🧠</span>
+                            <h3>ChatGPT</h3>
+                        </div>
+                        <p>OpenAI의 대화형 AI 모델</p>
+                        <div class="ai-domains">
+                            <span class="domain">chatgpt.com</span>
+                            <span class="domain">chat.openai.com</span>
+                        </div>
+                        <div class="toggle-switch" data-ai="chatgpt"></div>
+                    </div>
+                    
+                    <div class="ai-card" data-ai="claude">
+                        <div class="ai-header">
+                            <span class="ai-icon">🎭</span>
+                            <h3>Claude</h3>
+                        </div>
+                        <p>Anthropic의 헌법적 AI</p>
+                        <div class="ai-domains">
+                            <span class="domain">claude.ai</span>
+                        </div>
+                        <div class="toggle-switch" data-ai="claude"></div>
+                    </div>
+                    
+                    <div class="ai-card" data-ai="gemini">
+                        <div class="ai-header">
+                            <span class="ai-icon">💎</span>
+                            <h3>Gemini</h3>
+                        </div>
+                        <p>Google의 멀티모달 AI</p>
+                        <div class="ai-domains">
+                            <span class="domain">gemini.google.com</span>
+                        </div>
+                        <div class="toggle-switch" data-ai="gemini"></div>
+                    </div>
+                    
+                    <div class="ai-card" data-ai="perplexity">
+                        <div class="ai-header">
+                            <span class="ai-icon">🔍</span>
+                            <h3>Perplexity</h3>
+                        </div>
+                        <p>검색 기반 AI 어시스턴트</p>
+                        <div class="ai-domains">
+                            <span class="domain">perplexity.ai</span>
+                        </div>
+                        <div class="toggle-switch" data-ai="perplexity"></div>
+                    </div>
+                    
+                    <div class="ai-card" data-ai="grok">
+                        <div class="ai-header">
+                            <span class="ai-icon">🌐</span>
+                            <h3>Grok</h3>
+                        </div>
+                        <p>xAI의 Grok 챗봇</p>
+                        <div class="ai-domains">
+                            <span class="domain">grok.com</span>
+                            <span class="domain">x.com/grok</span>
+                        </div>
+                        <div class="toggle-switch" data-ai="grok"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 메시지 전송 설정 -->
+            <section class="section">
+                <h2>📤 메시지 전송 설정</h2>
+                <div class="option-group">
+                    <div class="option-item">
+                        <div class="option-info">
+                            <h3>🔔 알림 표시</h3>
+                            <p>메시지 전송 완료 시 알림을 표시합니다</p>
+                        </div>
+                        <div class="toggle-switch" data-option="notifications"></div>
+                    </div>
+                    
+                    <div class="option-item">
+                        <div class="option-info">
+                            <h3>🌐 자동 사이트 열기</h3>
+                            <p>확장 프로그램 시작 시 모든 AI 사이트를 자동으로 엽니다</p>
+                        </div>
+                        <div class="toggle-switch" data-option="autoOpen"></div>
+                    </div>
+                    
+                    <div class="option-item">
+                        <div class="option-info">
+                            <h3>📥 응답 자동 수집</h3>
+                            <p>AI 응답을 자동으로 수집하여 표시합니다</p>
+                        </div>
+                        <div class="toggle-switch" data-option="autoCollectResponses"></div>
+                    </div>
+                    
+                    <div class="option-item">
+                        <div class="option-info">
+                            <h3>⏱️ 전송 지연 시간</h3>
+                            <p>각 AI에게 메시지 전송 간 지연 시간 (밀리초)</p>
+                        </div>
+                        <select id="sendDelay" class="delay-select">
+                            <option value="0">즉시</option>
+                            <option value="500">0.5초</option>
+                            <option value="1000">1초</option>
+                            <option value="2000">2초</option>
+                            <option value="5000">5초</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MD 내보내기 설정 -->
+            <section class="section">
+                <h2>📄 MD 내보내기 설정</h2>
+                <div class="option-group">
+                    <div class="option-item">
+                        <div class="option-info">
+                            <h3>👤 사용자 메시지 포함</h3>
+                            <p>내보낸 마크다운에 사용자 메시지를 포함합니다</p>
+                        </div>
+                        <div class="toggle-switch" data-option="includeUserMessages"></div>
+                    </div>
+                    
+                    <div class="option-item">
+                        <div class="option-info">
+                            <h3>🤖 AI 응답 포함</h3>
+                            <p>내보낸 마크다운에 AI 응답을 포함합니다</p>
+                        </div>
+                        <div class="toggle-switch" data-option="includeAssistantMessages"></div>
+                    </div>
+                    
+                    <div class="option-item">
+                        <div class="option-info">
+                            <h3>🕒 타임스탬프 포함</h3>
+                            <p>내보낸 마크다운에 생성 시간과 메타데이터를 포함합니다</p>
+                        </div>
+                        <div class="toggle-switch" data-option="includeTimestamp"></div>
+                    </div>
+                    
+                    <div class="option-item">
+                        <div class="option-info">
+                            <h3>💾 자동 저장 모드</h3>
+                            <p>파일 다운로드 시 사용자에게 위치를 묻지 않고 자동 저장합니다</p>
+                        </div>
+                        <div class="toggle-switch" data-option="autoSaveMode"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 키보드 단축키 -->
+            <section class="section">
+                <h2>⌨️ 키보드 단축키</h2>
+                <div class="keyboard-shortcuts">
+                    <div class="shortcut-category">
+                        <h3>확장 프로그램 제어</h3>
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">확장 프로그램 활성화/비활성화</span>
+                            <span class="shortcut-key">Ctrl+Shift+T</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">팝업 열기</span>
+                            <span class="shortcut-key">Ctrl+Shift+A</span>
+                        </div>
+                    </div>
+                    
+                    <div class="shortcut-category">
+                        <h3>메시지 전송</h3>
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">모든 AI 사이트 열기</span>
+                            <span class="shortcut-key">Ctrl+Shift+O</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">선택한 텍스트 빠른 전송</span>
+                            <span class="shortcut-key">Ctrl+Shift+S</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">팝업에서 메시지 전송</span>
+                            <span class="shortcut-key">Ctrl+Enter</span>
+                        </div>
+                    </div>
+                    
+                    <div class="shortcut-category">
+                        <h3>MD 내보내기</h3>
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">현재 탭 MD 내보내기</span>
+                            <span class="shortcut-key">Ctrl+E</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">모든 탭 스캔</span>
+                            <span class="shortcut-key">Ctrl+S</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">일괄 내보내기</span>
+                            <span class="shortcut-key">Ctrl+B</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="shortcuts-note">
+                    💡 단축키는 Chrome 확장 프로그램 설정에서 변경할 수 있습니다
+                </p>
+            </section>
+
+            <!-- 고급 설정 -->
+            <section class="section">
+                <h2>⚙️ 고급 설정</h2>
+                <div class="option-group">
+                    <div class="option-item">
+                        <div class="option-info">
+                            <h3>🐛 디버그 모드</h3>
+                            <p>개발자 콘솔에 상세한 로그를 출력합니다</p>
+                        </div>
+                        <div class="toggle-switch" data-option="debugMode"></div>
+                    </div>
+                    
+                    <div class="option-item">
+                        <div class="option-info">
+                            <h3>🧪 실험적 기능</h3>
+                            <p>베타 기능을 활성화합니다 (불안정할 수 있음)</p>
+                        </div>
+                        <div class="toggle-switch" data-option="experimentalFeatures"></div>
+                    </div>
+                    
+                    <div class="option-item">
+                        <div class="option-info">
+                            <h3>🔄 자동 업데이트 확인</h3>
+                            <p>새로운 기능 및 개선사항 자동 확인</p>
+                        </div>
+                        <div class="toggle-switch" data-option="autoUpdateCheck"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 액션 버튼 -->
+            <div class="actions">
+                <button class="btn btn-primary" id="saveBtn">💾 설정 저장</button>
+                <button class="btn btn-secondary" id="resetBtn">🔄 기본값 복원</button>
+                <button class="btn btn-secondary" id="exportBtn">📤 설정 내보내기</button>
+                <button class="btn btn-secondary" id="importBtn">📥 설정 가져오기</button>
+                <button class="btn btn-info" id="testBtn">🧪 연결 테스트</button>
+            </div>
+
+            <!-- 상태 메시지 -->
+            <div class="status-message" id="statusMessage"></div>
+
+            <!-- 통계 정보 -->
+            <section class="section stats-section">
+                <h2>📊 사용 통계</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalMessages">-</div>
+                        <div class="stat-label">전송된 메시지</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalExports">-</div>
+                        <div class="stat-label">내보낸 파일</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="activeServices">-</div>
+                        <div class="stat-label">활성 서비스</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="lastUsed">-</div>
+                        <div class="stat-label">마지막 사용</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 푸터 -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p><strong>Universal AI Assistant</strong> v2.0.0</p>
+                    <p>Multi-Chat + MD Export 통합 확장 프로그램</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#" id="aboutLink">정보</a>
+                    <a href="#" id="feedbackLink">피드백</a>
+                    <a href="#" id="githubLink">GitHub</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 모달 다이얼로그 -->
+    <div id="modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">제목</h3>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body" id="modalBody">
+                내용
+            </div>
+            <div class="modal-footer">
+                <button id="modalCloseBtn" class="btn btn-secondary">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 테스트 결과 모달 -->
+    <div id="testModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🧪 연결 테스트 결과</h3>
+                <span class="modal-close" id="testModalClose">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="testResults" class="test-results"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="retestBtn" class="btn btn-primary">다시 테스트</button>
+                <button id="testModalCloseBtn" class="btn btn-secondary">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 파일 입력 (숨김) -->
+    <input type="file" id="importFile" accept=".json" style="display: none;">
+
+    <script src="options.js"></script>
+</body>
+</html>
